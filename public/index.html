@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>🚀 Personal Dashboard</h1>
+        <div class="header-controls">
+            <button id="theme-toggle">🌙</button>
+            <div class="status-indicator" id="status">●</div>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        <div class="widget weather-widget">
+            <h3>🌤️ Weather</h3>
+            <div class="widget-content">
+                <div class="temp">22°C</div>
+                <div class="condition">Sunny</div>
+            </div>
+        </div>
+
+        <div class="widget tasks-widget">
+            <h3>✅ Tasks</h3>
+            <div class="widget-content">
+                <div class="task">• Set up Azure deployment</div>
+                <div class="task">• Configure monitoring</div>
+                <div class="task">• Add GitHub integration</div>
+            </div>
+        </div>
+
+        <div class="widget system-widget">
+            <h3>💻 System Status</h3>
+            <div class="widget-content">
+                <div class="metric">CPU: <span class="value">45%</span></div>
+                <div class="metric">Memory: <span class="value">60%</span></div>
+                <div class="metric">Uptime: <span class="value" id="uptime">--</span></div>
+            </div>
+        </div>
+
+        <div class="widget github-widget">
+            <h3>🐙 GitHub Activity</h3>
+            <div class="widget-content">
+                <div class="activity">📝 Updated personal-dashboard</div>
+                <div class="activity">🔀 Merged PR #42</div>
+                <div class="activity">⭐ Starred new repo</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
