@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  theme     String   @default("dark")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  widgets   Widget[]
+  tasks     Task[]
+}
+
+model Widget {
+  id      String  @id @default(cuid())
+  type    String
+  title   String
+  enabled Boolean @default(true)
+  order   Int     @default(0)
+  config  Json?
+  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  priority    String   @default("medium") // low, medium, high
+  dueDate     DateTime?
+  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SystemMetric {
+  id        String   @id @default(cuid())
+  type      String   // cpu, memory, disk, network
+  value     Float
+  unit      String
+  timestamp DateTime @default(now())
+}
