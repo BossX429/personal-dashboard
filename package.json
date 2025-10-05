@@ -32,5 +32,34 @@
   },
   "keywords": ["dashboard", "azure", "monitoring", "personal"],
   "author": "BossX429",
-  "license": "MIT"
+  "license": "MIT",
+  "controllers": {
+    "UserController": {
+      "path": "/api/users",
+      "methods": {
+        "getCurrentUser": {
+          "httpMethod": "GET",
+          "endpoint": "/profile",
+          "description": "Secure user profile management"
+        }
+      }
+    }
+  },
+  "services": {
+    "AnalyticsService": {
+      "metricsRepository": "MetricsRepository",
+      "methods": {
+        "getSystemMetrics": {
+          "description": "High-performance data processing"
+        }
+      }
+    }
+  },
+  "jobs": {
+    "SystemMonitorJob": {
+      "schedule": "fixedRate",
+      "interval": 30000,
+      "description": "Scheduled system monitoring"
+    }
+  }
 }

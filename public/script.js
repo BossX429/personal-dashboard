@@ -51,12 +51,33 @@ async function loadDashboard() {
   }
 }
 
+// Load system metrics from Java API
+async function loadSystemMetrics() {
+  try {
+    const response = await fetch('/api/metrics/system');
+    const metrics = await response.json();
+    
+    // Update the system widget with real data
+    const cpuElement = document.querySelector('.system-widget .metric:nth-child(1) .value');
+    const memoryElement = document.querySelector('.system-widget .metric:nth-child(2) .value');
+    
+    if (cpuElement) cpuElement.textContent = `${Math.round(metrics.cpuUsage)}%`;
+    if (memoryElement) memoryElement.textContent = `${Math.round(metrics.memoryUsage)}%`;
+    
+    console.log('System metrics updated:', metrics);
+  } catch (error) {
+    console.error('Failed to load system metrics:', error);
+  }
+}
+
 // Initialize
 checkHealth();
 loadDashboard();
+loadSystemMetrics();
 
 // Update every 30 seconds
 setInterval(checkHealth, 30000);
+setInterval(loadSystemMetrics, 30000);
 
 // Add some interactive features
 document.querySelectorAll('.widget').forEach(widget => {
