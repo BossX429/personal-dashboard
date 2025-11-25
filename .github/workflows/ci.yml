@@ -74,9 +74,9 @@ jobs:
       - name: Check build artifacts
         run: |
           if [ -d "dist" ] || [ -d "build" ]; then
-            echo "✅ Build successful!"
+            echo " Build successful!"
           else
-            echo "⚠️ No dist/build folder - build may have failed"
+            echo " No dist/build folder - build may have failed"
           fi
 
   security:
@@ -101,11 +101,11 @@ jobs:
           CRITICAL_VULNS=$(npm audit --json --production | grep -c '"severity":"critical"' || true)
           
           if [ "$CRITICAL_VULNS" -gt 0 ]; then
-            echo "❌ Critical vulnerabilities found: $CRITICAL_VULNS"
+            echo " Critical vulnerabilities found: $CRITICAL_VULNS"
             exit 1
           elif [ "$HIGH_VULNS" -gt 0 ]; then
-            echo "⚠️ High vulnerabilities found: $HIGH_VULNS"
+            echo " High vulnerabilities found: $HIGH_VULNS"
             echo "Please review and fix"
           else
-            echo "✅ No critical/high vulnerabilities"
+            echo " No critical/high vulnerabilities"
           fi
