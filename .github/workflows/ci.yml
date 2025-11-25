@@ -1,4 +1,4 @@
-name: CI - Lint, Test, Build
+name: CI - Fast Pipeline
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
     branches: [ main, master, develop ]
 
 jobs:
-  lint:
-    name: ESLint
+  all-checks:
+    name: Lint, Test & Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+    
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -21,49 +21,17 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --prefer-offline --no-audit
       
-      - name: Run ESLint
-        run: npm run lint || echo "ESLint check completed with warnings"
+      - name: Lint with ESLint
+        run: npm run lint || echo "Linting completed with warnings"
         continue-on-error: true
-
-  test:
-    name: Jest Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
       
       - name: Run tests
-        run: npm test || echo "Tests completed"
+        run: npm test -- --maxWorkers=2 || echo "Tests completed"
         continue-on-error: true
         env:
           NODE_ENV: test
-
-  build:
-    name: Build Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
       
       - name: Generate Prisma Client
         run: npm run db:generate || echo "Prisma generate skipped"
@@ -71,19 +39,7 @@ jobs:
       
       - name: Build project
         run: npm run build
-
-  security:
-    name: Security Audit
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Run npm audit
+      - name: Security audit
         run: npm audit --production || echo "Audit completed"
         continue-on-error: true
