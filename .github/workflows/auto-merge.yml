@@ -1,3 +1,4 @@
+# DISABLED: This workflow had repeated failures and was auto-disabled
 name: Auto-Merge
 on:
   pull_request:
