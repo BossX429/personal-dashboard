@@ -1,70 +1,71 @@
 {
-  "name": "personal-dashboard",
-  "version": "1.0.0",
-  "description": "A modern personal dashboard with Azure integration",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "build": "npm run build:client",
-    "build:client": "webpack --mode production",
-    "test": "jest",
-    "lint": "eslint src/",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio"
-  },
-  "dependencies": {
-    "express": "^5.2.1",
-    "cors": "^2.8.5",
-    "helmet": "^7.0.0",
-    "dotenv": "^16.3.1",
-    "axios": "^1.5.0",
-    "@prisma/client": "^5.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1",
-    "jest": "^29.7.0",
-    "eslint": "^8.49.0",
-    "webpack": "^5.102.1",
-    "webpack-cli": "^5.1.4",
-    "prisma": "^5.5.0"
-  },
-  "keywords": [
-    "dashboard",
-    "azure",
-    "monitoring",
-    "personal"
-  ],
-  "author": "BossX429",
-  "license": "MIT",
-  "controllers": {
-    "UserController": {
-      "path": "/api/users",
-      "methods": {
-        "getCurrentUser": {
-          "httpMethod": "GET",
-          "endpoint": "/profile",
-          "description": "Secure user profile management"
-        }
-      }
-    }
-  },
-  "services": {
-    "AnalyticsService": {
-      "metricsRepository": "MetricsRepository",
-      "methods": {
-        "getSystemMetrics": {
-          "description": "High-performance data processing"
-        }
-      }
-    }
-  },
-  "jobs": {
-    "SystemMonitorJob": {
-      "schedule": "fixedRate",
-      "interval": 30000,
-      "description": "Scheduled system monitoring"
-    }
-  }
+    "name":  "personal-dashboard",
+    "version":  "1.0.0",
+    "description":  "A modern personal dashboard with Azure integration",
+    "main":  "src/index.js",
+    "scripts":  {
+                    "start":  "node src/index.js",
+                    "dev":  "nodemon src/index.js",
+                    "build":  "npm run build:client",
+                    "build:client":  "webpack --mode production",
+                    "test":  "jest",
+                    "lint":  "eslint src/",
+                    "db:generate":  "prisma generate",
+                    "db:push":  "prisma db push",
+                    "db:studio":  "prisma studio"
+                },
+    "dependencies":  {
+                         "express":  "^5.2.1",
+                         "cors":  "^2.8.5",
+                         "helmet":  "^7.0.0",
+                         "dotenv":  "^16.3.1",
+                         "axios":  "^1.5.0",
+                         "@prisma/client":  "^5.5.0",
+                         "express-rate-limit":  "^7.1.0"
+                     },
+    "devDependencies":  {
+                            "nodemon":  "^3.0.1",
+                            "jest":  "^29.7.0",
+                            "eslint":  "^8.49.0",
+                            "webpack":  "^5.102.1",
+                            "webpack-cli":  "^5.1.4",
+                            "prisma":  "^5.5.0"
+                        },
+    "keywords":  [
+                     "dashboard",
+                     "azure",
+                     "monitoring",
+                     "personal"
+                 ],
+    "author":  "BossX429",
+    "license":  "MIT",
+    "controllers":  {
+                        "UserController":  {
+                                               "path":  "/api/users",
+                                               "methods":  {
+                                                               "getCurrentUser":  {
+                                                                                      "httpMethod":  "GET",
+                                                                                      "endpoint":  "/profile",
+                                                                                      "description":  "Secure user profile management"
+                                                                                  }
+                                                           }
+                                           }
+                    },
+    "services":  {
+                     "AnalyticsService":  {
+                                              "metricsRepository":  "MetricsRepository",
+                                              "methods":  {
+                                                              "getSystemMetrics":  {
+                                                                                       "description":  "High-performance data processing"
+                                                                                   }
+                                                          }
+                                          }
+                 },
+    "jobs":  {
+                 "SystemMonitorJob":  {
+                                          "schedule":  "fixedRate",
+                                          "interval":  30000,
+                                          "description":  "Scheduled system monitoring"
+                                      }
+             }
 }
