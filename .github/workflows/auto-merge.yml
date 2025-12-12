@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'auto-merge')
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - uses: actions/github-script@60a0d83039c7499ae640ae8a5c4a1a8c1b9c1f2f
         with:
           script: |
