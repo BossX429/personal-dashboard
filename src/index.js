@@ -1,7 +1,10 @@
 ﻿const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+// Support both CJS and ESM shapes of express-rate-limit
+const _rateLimitPkg = require('express-rate-limit');
+const rateLimit = (_rateLimitPkg && (_rateLimitPkg.default || _rateLimitPkg));
+const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
