@@ -10,6 +10,9 @@ module.exports = [
         ...globals.node,
       },
     },
-    rules: {},
+    rules: {
+      "no-undef": "error",
+      "no-unused-vars": "warn",
+    },
   },
 ];
